@@ -14,6 +14,20 @@ A Claude Code mod that draws the output of the lean-ctx MCP server in color.
 Only the drawing changes: the model receives the tool output untouched. Whatever the mod does not
 recognise (signatures and map modes, errors, calls still running) Claude Code draws as usual.
 
+## Screenshots
+
+**ctx_patch**
+
+![ctx_patch: diff rows with line numbers, colored markers and syntax highlighting](docs/ctx-patch.png)
+
+**ctx_read**
+
+![ctx_read: highlighted code with a line-number gutter](docs/ctx-read.png)
+
+**ctx_search**
+
+![ctx_search: dim path:line, highlighted line and the enclosing-symbol note](docs/ctx-search.png)
+
 ## Install
 
 In a Claude Code terminal session:
