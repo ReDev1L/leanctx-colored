@@ -69,11 +69,21 @@ const drawRow = (els: Els, r: Row, lang: { path?: string }, k: string) => {
   )
 }
 
+// Symbol note `∈ name@L25`: the name in green, the line in blue, the rest dim
+const noteCell = ({ Box, Text }: Els, k: string, note: { name: string; line: string }) => (
+  <Box key={k} flexDirection="row" flexShrink={0}>
+    <Text dimColor> ∈ </Text>
+    <Text color="success">{note.name}</Text>
+    <Text dimColor>@</Text>
+    <Text color="ide">{note.line}</Text>
+  </Box>
+)
+
 // Code fills its whole cell: a width equal to the line keeps the symbol note right after the code
 const drawHit = (els: Els, hit: Hit, k: string) => {
   const cells = [fixedCell(els, `${k}.l`, `${hit.loc} `, DIM)]
   if (hit.body) cells.push(codeCell(els, `${k}.c`, hit.body, { path: hit.path }, { width: columns(hit.body) }))
-  if (hit.note) cells.push(fixedCell(els, `${k}.s`, ` ${hit.note}`, DIM))
+  if (hit.note) cells.push(noteCell(els, `${k}.s`, hit.note))
   return (
     <els.Box key={k} flexDirection="row">
       {cells}

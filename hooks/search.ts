@@ -2,8 +2,8 @@ import type { Hit, Part, View } from './model'
 
 // A hit: `src/app/models.py:42 line text`
 const HIT = /^([^\s:]+):(\d+) (.*)$/
-// lean-ctx note at the end of a hit: the symbol the match is inside, not code
-const SYMBOL_NOTE = / (∈\S+@L\d+)$/
+// lean-ctx note at the end of a hit: the symbol the match is inside (`∈name@L25`), not code
+const SYMBOL_NOTE = / ∈(\S+)@(L\d+)$/
 
 // ctx_search response: consecutive hits form a block highlighted by file extension,
 // other lines (counters, hints) are plain text. null when there are no hits
@@ -31,7 +31,12 @@ export function searchView(text: string): View | null {
       const note = SYMBOL_NOTE.exec(line)
       // Tabs expanded and trailing whitespace trimmed: drawing measures the code width from the body
       const body = (note ? line.slice(0, note.index) : line).replace(/\t/g, '    ').trimEnd()
-      hits.push({ loc: `${path}:${m[2] ?? ''}`, path, body, note: note?.[1] ?? '' })
+      hits.push({
+        loc: `${path}:${m[2] ?? ''}`,
+        path,
+        body,
+        note: note ? { name: note[1] ?? '', line: note[2] ?? '' } : null,
+      })
       found = true
     } else {
       flushHits()

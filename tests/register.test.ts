@@ -123,6 +123,20 @@ describe('ToolUse: ctx_read and ctx_search', () => {
       await ui.unmount()
     }
   })
+
+  test('ctx_search: the symbol note is `∈ name@L…` with the name in green and the line in blue', async ($, on) => {
+    stubEngine(on)
+    const text = '1 match\nshop/cart.py:27 return total ∈total@L25'
+    const row = useRow(asMcp(text), { tool_use_id: 'toolu_note', tool: 'mcp__lean-ctx__ctx_search' })
+    for (const surface of SURFACES) {
+      const ui = await $.ui.mount({ plugin: PLUGIN, surface, ...row })
+      expect((await ui.find({ type: 'Text', text: /^ ∈ $/ }))?.props).toMatchObject({ dimColor: true })
+      expect((await ui.find({ type: 'Text', text: /^total$/ }))?.props).toMatchObject({ color: 'success' })
+      expect((await ui.find({ type: 'Text', text: /^@$/ }))?.props).toMatchObject({ dimColor: true })
+      expect((await ui.find({ type: 'Text', text: /^L25$/ }))?.props).toMatchObject({ color: 'ide' })
+      await ui.unmount()
+    }
+  })
 })
 
 describe('ToolResult', () => {

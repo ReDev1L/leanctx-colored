@@ -12,8 +12,8 @@ describe('searchView', () => {
         {
           kind: 'hits',
           rows: [
-            { loc: 'a.py:2', path: 'a.py', body: 'import os', note: '' },
-            { loc: 'b.ts:5', path: 'b.ts', body: '  const y = 1', note: '' },
+            { loc: 'a.py:2', path: 'a.py', body: 'import os', note: null },
+            { loc: 'b.ts:5', path: 'b.ts', body: '  const y = 1', note: null },
           ],
         },
       ],
@@ -25,10 +25,11 @@ describe('searchView', () => {
     expect(searchView(text)?.rest.map(p => p.kind)).toEqual(['text', 'hits', 'text', 'hits'])
   })
 
-  test('the ∈symbol@L… note goes to note, tabs are expanded, trailing whitespace is trimmed', () => {
+  test('the ∈name@L… note splits into name and line, tabs are expanded, trailing whitespace is trimmed', () => {
     const text = '1 match\nmain.go:7 \treturn err  \t ∈run@L3'
+    const note = { name: 'run', line: 'L3' }
     expect(searchView(text)?.rest).toEqual([
-      { kind: 'hits', rows: [{ loc: 'main.go:7', path: 'main.go', body: '    return err', note: '∈run@L3' }] },
+      { kind: 'hits', rows: [{ loc: 'main.go:7', path: 'main.go', body: '    return err', note }] },
     ])
   })
 

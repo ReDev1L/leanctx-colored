@@ -1,8 +1,8 @@
 export type RowKind = 'file' | 'hunk' | 'add' | 'del' | 'ctx' | 'meta'
 // gutter is the line number (or padding), marker is '+', '-' or ' ' on code rows, body is the rest
 export type Row = { kind: RowKind; gutter: string; marker: string; body: string }
-// Search hit: loc is `path:line`, body is the line text, note is the enclosing symbol (`∈name@L25`)
-export type Hit = { loc: string; path: string; body: string; note: string }
+// Search hit: loc is `path:line`, body is the line text, note is the enclosing symbol from `∈name@L25`
+export type Hit = { loc: string; path: string; body: string; note: { name: string; line: string } | null }
 
 // A piece of the response, ready to draw
 export type Part =
