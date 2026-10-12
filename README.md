@@ -8,8 +8,8 @@ A Claude Code mod that draws the output of the lean-ctx MCP server in color.
   stays as dim text.
 - **ctx_read**: `lines`, `anchored`, `full`/`raw` and multi-file reads are drawn as highlighted
   code with a line-number gutter. Anchor hashes are hidden on screen; the model still gets them.
-- **ctx_search**: each hit shows a dim `path:line`, the highlighted line, and the `∈symbol@L…`
-  enclosing-symbol note right after the code.
+- **ctx_search**: each hit shows a dim `path:line`, the highlighted line, and the enclosing-symbol
+  note `∈ name@L…` right after the code, with the name in green and the line in blue.
 
 Only the drawing changes: the model receives the tool output untouched. Whatever the mod does not
 recognise (signatures and map modes, errors, calls still running) Claude Code draws as usual.
