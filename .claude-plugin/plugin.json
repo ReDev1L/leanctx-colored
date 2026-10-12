@@ -1,0 +1,11 @@
+{
+  "name": "leanctx-colored",
+  "displayName": "LeanCTX Colored",
+  "version": "0.1.0",
+  "description": "Colored lean-ctx output: syntax-highlighted diffs for ctx_patch, highlighted code for ctx_read and ctx_search",
+  "author": { "name": "Kirill Naumenko", "email": "welcome@redev1l.pro" },
+  "homepage": "https://github.com/ReDev1L/leanctx-colored",
+  "repository": "https://github.com/ReDev1L/leanctx-colored",
+  "license": "MIT",
+  "keywords": ["lean-ctx", "mcp", "diff", "syntax-highlighting", "mod"]
+}

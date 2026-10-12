@@ -1,0 +1,12 @@
+{
+  "name": "leanctx-colored",
+  "owner": { "name": "Kirill Naumenko", "email": "welcome@redev1l.pro" },
+  "metadata": { "description": "LeanCTX Colored: a Claude Code mod that colors lean-ctx MCP output" },
+  "plugins": [
+    {
+      "name": "leanctx-colored",
+      "source": "./",
+      "description": "Colored lean-ctx output: syntax-highlighted diffs for ctx_patch, highlighted code for ctx_read and ctx_search"
+    }
+  ]
+}
